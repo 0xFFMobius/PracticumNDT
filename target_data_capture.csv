@@ -1,0 +1,56 @@
+Equipment,KPI's to be measured/recorded,Olympus L2 Commands/Events,Data Source
+Calibration,Calibration inspection number,Set Name (check cal and inspection),JSON/SQL
+Calibration,Target identifier,Get Calibration Defect ,JSON
+Calibration,target location,Get Calibration Defect ,JSON
+Calibration,Found/Not found,Get Check Calibration Results or Verdict,JSON
+Calibration,Primary probe used,Get Curve,JSON
+Calibration,Signal amplitude,Get Check Calibration Results,JSON
+Calibration,Expected response?,Get Check Calibration Results,JSON
+Calibration,signal noise level,Get Curve,Stream
+Calibration,Signal to Noise ratio,Get Curve,Stream
+Calibration,Calibration rail number,Set Calibration Defect,JSON/SQL
+Calibration,Calibration time (time stamp),Get Calibration Results,JSON/SQL
+Calibration,Calibration Cert Number (identifier),Get Calibration Results,JSON/SQL
+Calibration,Meets inspection plan,Get Check Calibration Results,JSON
+Calibration,Test rail number or section,Set Name (check cal and inspection),TBD
+Calibration,Crew,Tracking ,SQL Tracking
+Calibration,Inspector ID,Set Batch,SQL Tracking
+Calibration,Overall test verified,Get Check Calibration Results,JSON
+Eddy Current ,Recipe,Set Batch / Get Setup List By Type,SQL Tracking
+Eddy Current ,Probe identifier,*JSON Defect File,JSON
+Eddy Current ,Count by feature area,*JSON Defect File,JSON
+Eddy Current ,Location along rail,*JSON Defect File,JSON
+Eddy Current ,Feature Region (head web base),*JSON Defect File,JSON
+Eddy Current ,Feature Detail (e.g. suface map),Get Curve,Stream
+Eddy Current ,Orientation (angle relative to rail surface),*JSON Defect File,JSON
+Eddy Current ,Indication type (linear/globular),Get Curve,JSON
+Eddy Current ,Deviation from surface 1,*JSON Defect File,JSON
+Eddy Current ,Signal Amplitude,*JSON Defect File,JSON
+Eddy Current ,Signal Noise,Get Curve,Stream
+Eddy Current ,Signal to noise ratio,Get Curve,Stream
+Eddy Current ,Pulse Counts (size of defect),*JSON Defect File,JSON
+Eddy Current ,Length of indication,*JSON Defect File,JSON
+Eddy Current ,Width of indication,*JSON Defect File,JSON
+Eddy Current ,Threshold variations (acceptable or not),Get Curve,JSON
+Eddy Current ,False indication rate,*JSON Defect File,JSON
+Eddy Current ,New indications flag (Second Unit),*JSON Defect File,JSON
+Ultrasonic unit,Recipe,Set Batch / Get Setup List By Type,SQL Tracking
+Ultrasonic unit,Probe identifier,*JSON Defect File,JSON
+Ultrasonic unit,Count by feature area,*JSON Defect File,JSON
+Ultrasonic unit,Location along rail,*JSON Defect File,JSON
+Ultrasonic unit,"Feature Area (e.g. head, web, baase)",*JSON Defect File,JSON
+Ultrasonic unit,"Orientation (vert, horiz)",Get Curve,JSON
+Ultrasonic unit,Indication type (linear/globular),Get Curve,JSON
+Ultrasonic unit,Depth from surface 1,*JSON Defect File,JSON
+Ultrasonic unit,Depth from surface 2,*JSON Defect File,JSON
+Ultrasonic unit,Depth from surface 3,*JSON Defect File,JSON
+Ultrasonic unit,Signal Amplitude,*JSON Defect File,Stream
+Ultrasonic unit,Signal Noise,Get Curve,Stream
+Ultrasonic unit,Signal to noise ratio,Get Curve,Calculated
+Ultrasonic unit,Pulse Counts (size of defect),*JSON Defect File,JSON
+Ultrasonic unit,Length of indication,*JSON Defect File,JSON
+Ultrasonic unit,Height of indication,*JSON Defect File,JSON
+Ultrasonic unit,width of indication,*JSON Defect File,JSON
+Ultrasonic unit,Threshold variations (acceptable or not),*JSON Defect File,JSON
+Ultrasonic unit,False indication rate,*JSON Defect File,JSON
+Ultrasonic unit,New indication flag,*JSON Defect File,JSON
