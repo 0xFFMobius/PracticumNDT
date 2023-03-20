@@ -1,0 +1,1308 @@
+//formatted text to visualize with dbdiagram.io
+
+Table AlarmFilter {
+  AlarmFilterIndex int 
+  APDFilter int 
+  RPDFilter int 
+  FK_AF_ModeIndex int [ref: > Mode.ModeIndex]
+  GateID tinyint 
+}
+Table AlarmFilterSetup {
+  AlarmFilterSetupIndex int 
+  APDFilter int 
+  RPDFilter int 
+  FK_AFS_ModeSetupIndex int [ref: > ModeSetup.ModeSetupIndex]
+  GateID tinyint 
+}
+Table AlarmInfoEC {
+  AlarmInfoECIndex int 
+  AlarmID smallint 
+  minAlarmLevelX float 
+  maxAlarmLevelX float 
+  minAlarmLevelY float 
+  maxAlarmLevelY float 
+  FK_A_ChannelECIndex int [ref: > ChannelEC.ChannelECIndex]
+}
+Table AppSetting {
+  OrganizationName nvarchar 
+}
+Table BWERAlarm {
+  BWERAlarmIndex int 
+  SystemID tinyint 
+  ChannelID smallint 
+  RadialPosition int 
+  AxialPosition int 
+  IndicationLength int 
+  IndicationWidth int 
+  EntryDate datetime 
+  FK_BWERA_TubeIndex int [ref: > Tube.TubeIndex]
+}
+Table Batch {
+  BatchIndex int 
+  OrderListNumber int 
+  Name nvarchar 
+  StartDate datetime 
+  EndDate datetime 
+  SteelType nvarchar 
+  Documents nvarchar 
+  Area nvarchar 
+  Thermal nvarchar 
+  FlowNumber nvarchar 
+  Customer nvarchar 
+  FK_B_OrderIndex int [ref: > Order.OrderIndex]
+  ProductDimension nvarchar 
+  ControlSpecification nvarchar 
+  OperatorName nvarchar 
+  Equipment nvarchar 
+  ProductPrefix nvarchar 
+}
+Table BatchCustomFieldTemplate {
+  BatchCustomFieldTemplateIndex int 
+  SectionID int 
+  FieldName nvarchar 
+  OrderID int 
+}
+Table BatchCustomFieldValue {
+  BatchCustomValueIndex int 
+  SectionID int 
+  FieldName nvarchar 
+  FieldValue nvarchar 
+  OrderID int 
+  FK_BCFV_BatchIndex int [ref: > Batch.BatchIndex]
+}
+Table BatchEC {
+  BatchECIndex int 
+  Diameter float 
+  FK_BEC_ProductTypeECIndex int [ref: > ProductTypeEC.ProductTypeECIndex]
+  FK_BEC_SetupIndex int [ref: > Setup.SetupIndex]
+  FK_BEC_BatchIndex int [ref: > Batch.BatchIndex]
+  CornerRadius float 
+  Width float 
+  Thickness float 
+}
+Table BatchUT {
+  BatchUTIndex int 
+  FK_BUT_ProductTypeUTIndex int [ref: > ProductTypeUT.ProductTypeUTIndex]
+  FK_BUT_SetupIndex int [ref: > Setup.SetupIndex]
+  FK_BUT_BatchIndex int [ref: > Batch.BatchIndex]
+}
+Table BenchInfo {
+  BenchInfoIndex int 
+  SystemID tinyint 
+  Name nvarchar 
+  FK_BI_SetupIndex int [ref: > Setup.SetupIndex]
+}
+Table BenchLayer {
+  BenchLayerIndex int 
+  LayerNumber int 
+  FK_BL_BenchInfoIndex int [ref: > BenchInfo.BenchInfoIndex]
+}
+Table BenchMode {
+  BenchModeIndex int 
+  ChannelType int 
+  FK_BM_BenchLayerIndex int [ref: > BenchLayer.BenchLayerIndex]
+}
+Table BenchQuickScan {
+  BenchQuickScanIndex int 
+  UserNumber int 
+  FK_BQ_BenchLayerIndex int [ref: > BenchLayer.BenchLayerIndex]
+}
+Table CalibReportInfo {
+  CalibReportInfoIndex int 
+  ChannelName nvarchar 
+  ChannelGain float 
+  DefectName nvarchar 
+  GateID int 
+  AmplitudeWanted float 
+  AmplitudeTolerance float 
+  PhasedArray bit 
+  ZoneBeginAxial int 
+  ZoneEndAxial int 
+  ZoneBeginRadial int 
+  ZoneEndRadial int 
+  IsCalibrated bit 
+  FK_CRI_CalibScanIndex int [ref: > CalibrationScan.CalibrationScanIndex]
+}
+Table CalibReportResult {
+  CalibReportResultIndex int 
+  LawID int 
+  LawName nvarchar 
+  AmplitudeFound float 
+  GainOffsetBefore float 
+  GainOffset float 
+  GainGateBefore float 
+  GainGate float 
+  FK_CRR_CalibReportInfoIndex int [ref: > CalibReportInfo.CalibReportInfoIndex]
+}
+Table CalibrationFocalLawDacOffset {
+  DacOffsetIndex int 
+  FocalLawID int 
+  Pt_1 int 
+  Pt_2 int 
+  Pt_3 int 
+  Pt_4 int 
+  Pt_5 int 
+  Pt_6 int 
+  Pt_7 int 
+  Pt_8 int 
+  Pt_9 int 
+  Pt_10 int 
+  FK_CFLD_CalibrationGainIndex int [ref: > CalibrationGain.CalibrationGainIndex]
+}
+Table CalibrationFocalLawGain {
+  CalibrationFocalLawGainIndex int 
+  FocalLawID int 
+  Gain float 
+  GainU float 
+  GainGate1 int 
+  GainGate2 int 
+  GainGate3 int 
+  FK_CFL_CalibrationGainIndex int [ref: > CalibrationGain.CalibrationGainIndex]
+  FirstElement int 
+  ElementQty int 
+}
+Table CalibrationGain {
+  CalibrationGainIndex int 
+  ChannelID int 
+  Gain float 
+  GainGate1 int 
+  GainGate2 int 
+  GainGate3 int 
+  ChannelName nvarchar 
+  FK_CG_CalibrationSetUTIndex int [ref: > CalibrationSetUT.CalibrationSetUTIndex]
+}
+Table CalibrationPointEC {
+  CalibrationPointECIndex int 
+  Name nvarchar 
+  AxialBegin float 
+  AxialEnd float 
+  RadialBegin float 
+  RadialEnd float 
+  GroupName nvarchar 
+  DataType int 
+  AmplitudeTarget float 
+  AmplitudeTolerance float 
+  IsAmplitudeCalibActive bit 
+  PhaseTarget float 
+  PhaseTolerance float 
+  IsPhaseCalibActive bit 
+  GainMax float 
+  Calibration bit 
+  CheckCalibration bit 
+  CalibrationType int 
+  FK_CPEC_CalibrationProductECIndex int [ref: > CalibrationProductEC.CalibrationProductECIndex]
+}
+Table CalibrationProbeProduct {
+  CalibrationProbeIndex int 
+  Name nvarchar 
+  ChannelName nvarchar 
+  FK_CPP_ProductTypeUTIndex int [ref: > ProductTypeUT.ProductTypeUTIndex]
+  CalibrationProbeDate datetime 
+}
+Table CalibrationProduct {
+  CalibrationProductIndex int 
+  Name nvarchar 
+  Length float 
+  FK_CP_ProductTypeUTIndex int [ref: > ProductTypeUT.ProductTypeUTIndex]
+  CalibrationDate datetime 
+}
+Table CalibrationProductEC {
+  CalibrationProductECIndex int 
+  Name nvarchar 
+  Length float 
+  Diameter float 
+  FK_CPEC_ProductTypeECIndex int [ref: > ProductTypeEC.ProductTypeECIndex]
+}
+Table CalibrationScan {
+  CalibrationScanIndex int 
+  SystemID tinyint 
+  Judgment tinyint 
+  Length int 
+  EntryDate datetime 
+  DrtFileName nvarchar 
+  ProductTypeName nvarchar 
+  CalibrationProductName nvarchar 
+  CalibrationSetName nvarchar 
+  SetupName nvarchar 
+  FK_CSC_HRSetIndex int [ref: > HRSet.HRSetIndex]
+}
+Table CalibrationSetUT {
+  CalibrationSetUTIndex int 
+  Name nvarchar 
+  FK_CSUT_MasterSetupIndex int //[ref: > MasterSetup.MasterSetupIndex]
+  FK_CSUT_ProductTypeUTIndex int [ref: > ProductTypeUT.ProductTypeUTIndex]
+}
+Table CalibrationValueEC {
+  CalibrationValueECIndex int 
+  Board int 
+  TimeSlot int 
+  Input int 
+  Gain float 
+  Rotation float 
+  LiftOffReferenceValueX float 
+  LiftOffReferenceValueY float 
+  GainU float 
+  RotationU float 
+  DataType int 
+  FrequencyId int 
+  ChannelName nvarchar 
+  Timestamp datetime 
+  FK_CVEC_ProductTypeECIndex int [ref: > ProductTypeEC.ProductTypeECIndex]
+}
+Table CalibrationValueReportEC {
+  CalibrationValueReportECIndex int 
+  Timestamp datetime 
+  ChannelName nvarchar 
+  Datatype nvarchar 
+  Gain int 
+  GainFactorBefore float 
+  GainFactorAfter float 
+  RotationBefore float 
+  RotationAfter float 
+  Amplitude float 
+  Phase float 
+  LiftOffReferenceValue float 
+  CalibrationProductName nvarchar 
+  ProductTypeName nvarchar 
+  SetupName nvarchar 
+  CalibrationPointName nvarchar 
+  AmplitudeTarget float 
+  AmplitudeTolerance float 
+  PhaseTarget float 
+  PhaseTolerance float 
+  AxialBegin float 
+  AxialEnd float 
+  RadialBegin float 
+  RadialEnd float 
+  IsCalibrated bit 
+}
+Table Channel {
+  ChannelIndex int 
+  ChannelID smallint 
+  Name nvarchar 
+  GroupID int 
+  ChannelNumber smallint 
+  SubChannelNumber smallint 
+  ChannelOrientation tinyint 
+  ObliqueAngle float 
+  Gain float 
+  TimeBaseStart float 
+  TimeBaseLength float 
+  SynchroMode int 
+  DigitizingFrequency int 
+  AcquisitionRate float 
+  PRF int 
+  HPFilter int 
+  LPFilter int 
+  Smoothing int 
+  Rectification int 
+  PulseWidth int 
+  PulseVoltage int 
+  BeamAngle int 
+  PulserType tinyint 
+  APD int 
+  RPD int 
+  HelixPitch int 
+  FK_C_ModeIndex int [ref: > Mode.ModeIndex]
+  Gapless bit 
+  ObliqueAngleStart float 
+  ObliqueOrientation tinyint 
+}
+Table ChannelEC {
+  ChannelECIndex int 
+  DataType smallint 
+  Name nvarchar 
+  ChannelECID smallint 
+  DataMin float 
+  DataMax float 
+  APD int 
+  RPD int 
+  AcquisitionRate float 
+  FK_C_ModeECIndex int [ref: > ModeEC.ModeECIndex]
+}
+Table ChannelSetup {
+  ChannelSetupIndex int 
+  ChannelID smallint 
+  Name nvarchar 
+  ChannelNumber smallint 
+  SubChannelNumber smallint 
+  ChannelOrientation tinyint 
+  ObliqueAngle float 
+  Gain float 
+  TimeBaseStart int 
+  TimeBaseLength int 
+  SynchroMode int 
+  DigitizingFrequency int 
+  AcquisitionRate float 
+  PRF int 
+  HPFilter int 
+  LPFilter int 
+  Smoothing int 
+  Rectification int 
+  PulseWidth int 
+  PulseVoltage int 
+  FK_CS_ModeSetupIndex int [ref: > ModeSetup.ModeSetupIndex]
+  BeamAngle int 
+  PulserType tinyint 
+  Gapless bit 
+  ObliqueAngleStart float 
+  ObliqueOrientation tinyint 
+}
+Table CheckBWERAlarm {
+  CheckBWERAlarmIndex int 
+  SystemID tinyint 
+  ChannelID smallint 
+  RadialPosition int 
+  AxialPosition int 
+  IndicationLength int 
+  IndicationWidth int 
+  EntryDate datetime 
+  FK_CBWERA_CheckCalibrationIndex int [ref: > CheckCalibration.CheckCalibrationIndex]
+}
+Table CheckCalibReportResult {
+  CheckCalibReportResultIndex int 
+  ChannelName nvarchar 
+  GateID int 
+  DefectName nvarchar 
+  ZoneBegin int 
+  ZoneEnd int 
+  AmplitudeFound float 
+  AmplitudeLevel float 
+  AxialPosition int 
+  RadialPosition int 
+  Reached int 
+  FK_CCRR_CheckCalibrationIndex int [ref: > CheckCalibration.CheckCalibrationIndex]
+}
+Table CheckCalibration {
+  CheckCalibrationIndex int 
+  Name nvarchar 
+  IsComplete bit 
+  DrtFileName nvarchar 
+  InspectionDate datetime 
+  Archived bit 
+  ArchiveReference nvarchar 
+  ArchivedDate datetime 
+  FK_CC_BatchIndex int [ref: > Batch.BatchIndex]
+  InspectionRefID int 
+  InspectionDirection tinyint 
+  Length int 
+  SystemID tinyint 
+  DrtName nvarchar 
+}
+Table CheckCalibrationReportEC {
+  CheckCalibrationReportECIndex int 
+  Timestamp datetime 
+  CalibrationProductName nvarchar 
+  GroupName nvarchar 
+  CalibrationPointName nvarchar 
+  Datatype nvarchar 
+  Amplitude float 
+  Phase float 
+  AxialBegin float 
+  AxialEnd float 
+  RadialBegin float 
+  RadialEnd float 
+  AmplitudeTarget float 
+  AmplitudeTolerance float 
+  PhaseTarget float 
+  PhaseTolerance float 
+  FK_CCREC_BatchIndex int [ref: > Batch.BatchIndex]
+  FK_CCRR_CheckCalibrationIndex int [ref: > CheckCalibration.CheckCalibrationIndex]
+}
+Table CheckDimensionData {
+  CheckDimensionDataIndex int 
+  SystemID tinyint 
+  ChannelID smallint 
+  Type tinyint 
+  CompressionType tinyint 
+  DataMin int 
+  DataMax int 
+  ScanQty int 
+  ScanRes int 
+  IndexQty int 
+  IndexRes int 
+  DataQty tinyint 
+  Data image 
+  FK_CDD_CheckCalibrationIndex int [ref: > CheckCalibration.CheckCalibrationIndex]
+  IndexStartOffset int 
+  IndexFirstValidPoint int 
+}
+Table CheckEOTAlarm {
+  CheckEOTAlarmIndex int 
+  SystemID tinyint 
+  Zone tinyint 
+  Submode tinyint 
+  AlarmType tinyint 
+  Length int 
+  EntryDate datetime 
+  FK_CEOTA_CheckCalibrationIndex int [ref: > CheckCalibration.CheckCalibrationIndex]
+}
+Table CheckEOTInfo {
+  CheckEOTInfoIndex int 
+  SystemID tinyint 
+  Zone tinyint 
+  Position int 
+  Length int 
+  SubMode tinyint 
+  FK_CEOTI_CheckCalibrationIndex int [ref: > CheckCalibration.CheckCalibrationIndex]
+}
+Table CheckFlawData {
+  CheckFlawDataIndex int 
+  SystemID tinyint 
+  ChannelID smallint 
+  GateID tinyint 
+  CompressionType tinyint 
+  ScanQty int 
+  ScanRes int 
+  IndexQty int 
+  IndexRes int 
+  Data image 
+  FK_CFD_CheckCalibrationIndex int [ref: > CheckCalibration.CheckCalibrationIndex]
+  IndexStartOffset int 
+  IndexFirstValidPoint int 
+}
+Table CheckLamDefect {
+  CheckLamDefectIndex int 
+  Zone int 
+  PercentOfSurface float 
+  FK_CLD_CheckLamInfoIndex int [ref: > CheckLamInfo.CheckLamInfoIndex]
+}
+Table CheckLamDefectContour {
+  CheckLamDefectContourIndex int 
+  Type int 
+  RefID int 
+  AxialPos float 
+  AxialLength float 
+  RadialPos float 
+  RadialLength float 
+  Area float 
+  FK_CLDC_CheckLamDefectIndex int [ref: > CheckLamDefect.CheckLamDefectIndex]
+}
+Table CheckLamInfo {
+  CheckLamInfoIndex int 
+  SystemID int 
+  RadialLength float 
+  AxialLength float 
+  EOTInTrimPos float 
+  EOTOutTrimPos float 
+  FK_CLI_CheckCalibrationIndex int [ref: > CheckCalibration.CheckCalibrationIndex]
+}
+Table CheckLamSliding {
+  CheckLamSlidingIndex int 
+  Direction int 
+  StartPos float 
+  StopPos float 
+  Percent float 
+  Count float 
+  FK_CLS_CheckLamDefectContourIndex int [ref: > CheckLamDefectContour.CheckLamDefectContourIndex]
+}
+Table CheckRBGAlarm {
+  CheckRBGAlarmIndex int 
+  SystemID tinyint 
+  ChannelID smallint 
+  RadialPosition int 
+  AxialPosition int 
+  IndicationLength int 
+  IndicationWidth int 
+  FilterID int 
+  EntryDate datetime 
+  FK_CRBGA_CheckCalibrationIndex int [ref: > CheckCalibration.CheckCalibrationIndex]
+}
+Table CouplingAlarm {
+  CouplingAlarmIndex int 
+  SystemID tinyint 
+  ChannelID smallint 
+  AxialPosition int 
+  Type tinyint 
+  EntryDate datetime 
+  FK_CA_TubeIndex int [ref: > Tube.TubeIndex]
+}
+Table DBVersionInfo {
+  DBVersionInfoIndex int 
+  MajorAppVersion tinyint 
+  MinorAppVersion tinyint 
+  DBVersion tinyint 
+}
+Table DeadZoneEC {
+  DeadZoneECIndex int 
+  DeadZoneIn int 
+  DeadZoneOut int 
+  ResetFilterOffset int 
+  LowerWearShoes int 
+  RaiseWearShoes int 
+  FK_PZEC_ProductTypeECIndex int [ref: > ProductTypeEC.ProductTypeECIndex]
+  LowerWearShoesCorner int 
+  RaiseWearShoesCorner int 
+}
+Table DefaultParamCalibrationDefect {
+  DefaultParamCalibrationDefectIndex int 
+  DefectMode int 
+  DefectName nvarchar 
+  DefectID int 
+  DimOrFlawDefect int 
+  MaxDef bit 
+  dCalibrationLevel float 
+  dToleranceAmp float 
+  dTolrerancePos int 
+  dToleranceTimeOfFlight int 
+  NominalValue int 
+  MinimumValue int 
+  MaximumValue int 
+  AxialPosition int 
+  MaxAmpValue int 
+  BeginDefect int 
+  EndDefect int 
+  MaxTOFValue int 
+  DefectType nvarchar 
+  FK_DPC_DefaultParamCalibrationProductIndex int [ref: > DefaultParamCalibrationProduct.DefaultParamCalibrationProductIndex]
+  Obliquity int 
+}
+Table DefaultParamCalibrationProduct {
+  DefaultParamCalibrationProductIndex int 
+  CalibrationProductName nvarchar 
+  Length float 
+  QvProductID tinyint 
+}
+Table DefaultParamDim {
+  DefaultParamDimIndex int 
+  iDimType smallint 
+  BRangeAlarmNominalCorpID bit 
+  BRangeAlarmNominalExtremityID bit 
+  BRangeAlarmEccOvalityCorpID bit 
+  BRangeAlarmAverageCorpID bit 
+  dEnteredCorpValueID float 
+  dResultCorpValueID float 
+  dRangeAlarmNominalCorpValueID float 
+  dRangeRejectNominalCorpValueID float 
+  dRangeAlarmEccOvalityCorpID float 
+  dRangeAlarmAverageCorpValueID float 
+  dEnteredExtremityValueID float 
+  dRangeAlarmNominalExtremityValueID float 
+  dRangeRejectNominalExtremityValueID float 
+  dRangeAlarmEccOvalityExtremityID float 
+  dRangeAlarmAverageExtremityValueID float 
+  dNonInspectedInValueID float 
+  dNonInspectedOutValueID float 
+  dBeginValueID float 
+  dEndValueID float 
+  BRangeAlarmNominalCorpOD bit 
+  BRangeAlarmNominalExtremityOD bit 
+  BRangeAlarmEccOvalityCorpOD bit 
+  BRangeAlarmAverageCorpOD bit 
+  dEnteredCorpValueOD float 
+  dResultCorpValueOD float 
+  dRangeAlarmNominalCorpValueOD float 
+  dRangeRejectNominalCorpValueOD float 
+  dRangeAlarmEccOvalityCorpOD float 
+  dRangeAlarmAverageCorpValueOD float 
+  dEnteredExtremityValueOD float 
+  dRangeAlarmNominalExtremityValueOD float 
+  dRangeRejectNominalExtremityValueOD float 
+  dRangeAlarmEccOvalityExtremityOD float 
+  dRangeAlarmAverageExtremityValueOD float 
+  dNonInspectedInValueOD float 
+  dNonInspectedOutValueOD float 
+  dBeginValueOD float 
+  dEndValueOD float 
+  BRangeAlarmNominalCorpWT bit 
+  BRangeAlarmNominalExtremityWT bit 
+  BRangeAlarmEccOvalityCorpWT bit 
+  BRangeAlarmAverageCorpWT bit 
+  dEnteredCorpValueWT float 
+  dResultCorpValueWT float 
+  dRangeAlarmNominalCorpValueWT float 
+  dRangeRejectNominalCorpValueWT float 
+  dRangeAlarmEccOvalityCorpWT float 
+  dRangeAlarmAverageCorpValueWT float 
+  dEnteredExtremityValueWT float 
+  dRangeAlarmNominalExtremityValueWT float 
+  dRangeRejectNominalExtremityValueWT float 
+  dRangeAlarmEccOvalityExtremityWT float 
+  dRangeAlarmAverageExtremityValueWT float 
+  dNonInspectedInValueWT float 
+  dNonInspectedOutValueWT float 
+  dBeginValueWT float 
+  dEndValueWT float 
+  lEccFormula int 
+  dEccCoefficient float 
+}
+Table DefaultParamFlaw {
+  DefaultParamFlawIndex int 
+  dAlarmLevelLW float 
+  dAlarmLevelLamination float 
+  dAlarmLevelLongi float 
+  dAlarmLevelOblique float 
+  dAlarmLevelTrans float 
+  dLimitsInLW float 
+  dLimitsInLamination float 
+  dLimitsInLongi float 
+  dLimitsInOblique float 
+  dLimitsInTrans float 
+  dAlarmNumberingLW float 
+  dAlarmNumberingLamination float 
+  dAlarmNumberingLongi float 
+  dAlarmNumberingOblique float 
+  dAlarmNumberingTrans float 
+  dLimitsOutLW float 
+  dLimitsOutLamination float 
+  dLimitsOutLongi float 
+  dLimitsOutOblique float 
+  dLimitsOutTrans float 
+  dAlarmLevelCoupling float 
+  dAlarmNumberingCoupling float 
+  dLimitsInCoupling float 
+  dLimitsOutCoupling float 
+  dAlarmLevel2LW float 
+  dAlarmLevel2Lamination float 
+  dAlarmLevel2Longi float 
+  dAlarmLevel2Oblique float 
+  dAlarmLevel2Trans float 
+  dAlarmNumbering2LW float 
+  dAlarmNumbering2Lamination float 
+  dAlarmNumbering2Longi float 
+  dAlarmNumbering2Oblique float 
+  dAlarmNumbering2Trans float 
+  dCouplingAlarmNumbering float 
+  dStatisticAlarmPct float 
+  dAlarmLevelSW float 
+  dLimitsInSW float 
+  dAlarmNumberingSW float 
+  dLimitsOutSW float 
+  dAlarmLevel2SW float 
+  dAlarmNumbering2SW float 
+  AlarmLevel_LW_HEAD float 
+  AlarmLevel2_LW_HEAD float 
+  AlarmLevel_LW_HEAD_SIDE float 
+  AlarmLevel2_LW_HEAD_SIDE float 
+  AlarmLevel_LW_FOOT float 
+  AlarmLevel2_LW_FOOT float 
+  AlarmLevel_LW_WEB float 
+  AlarmLevel2_LW_WEB float 
+  QvProductID tinyint 
+}
+Table DefaultParamFlawRail {
+  AlarmLevel_Head float 
+  AlarmLevel2_Head float 
+  AlarmLevel_Head_Side float 
+  AlarmLevel2_Head_Side float 
+  AlarmLevel_Web float 
+  AlarmLevel2_Web float 
+  AlarmLevel_Flange float 
+  AlarmLevel2_Flange float 
+  AlarmLevel_Base float 
+  AlarmLevel2_Base float 
+  QvProductID tinyint 
+}
+Table DefaultParamUSVelocity {
+  DefaultParamUSVelocityIndex int 
+  dCouplingValue float 
+  dTransverseValue float 
+  dLongitudinalValue float 
+  QvProductID tinyint 
+  CreepingValue float 
+}
+Table DefaultSetupParams {
+  DefaultSetupParamsIndex int 
+  ModeID tinyint 
+  AcquisitionRate float 
+  PRF int 
+  LimitIn float 
+  LimitOut float 
+  FK_DSP_ProductTypeUTIndex int [ref: > ProductTypeUT.ProductTypeUTIndex]
+}
+Table DefaultSetupParamsBWER {
+  DefaultSetupParamsBWERIndex int 
+  Enable int 
+  Mode int 
+  GateID int 
+  MaxThreshold int 
+  MinThreshold int 
+  MaxAlarmLength float 
+  MinAlarmLength float 
+  OuputQuickscan int 
+  OutputPin int 
+  FK_DSP_BWER_ProductTypeUTIndex int [ref: > ProductTypeUT.ProductTypeUTIndex]
+}
+Table DefaultSetupParamsGate {
+  DefaultSetupParamsGateIndex int 
+  GateID tinyint 
+  APDFilter int 
+  RPDFilter int 
+  FK_DSPG_DefaultSetupParamsIndex int [ref: > DefaultSetupParams.DefaultSetupParamsIndex]
+}
+Table Defect2DEC {
+  Defect2DECIndex int 
+  PointX1 float 
+  PointY1 float 
+  PointX2 float 
+  PointY2 float 
+  PointX3 float 
+  PointY3 float 
+  PointX4 float 
+  PointY4 float 
+  DataType tinyint 
+  GroupID int 
+  ChannelID int 
+  AlarmID int 
+  ModeID tinyint 
+  MaxAmplitude float 
+  FK_D2DEC_TubeIndex int [ref: > Tube.TubeIndex]
+  AlarmModeID tinyint 
+}
+Table Defect2DUT {
+  Defect2DUTIndex int 
+  PointX1 float 
+  PointY1 float 
+  PointX2 float 
+  PointY2 float 
+  PointX3 float 
+  PointY3 float 
+  PointX4 float 
+  PointY4 float 
+  ModeID int 
+  GroupID int 
+  ChannelID int 
+  FK_D2DUT_TubeIndex int [ref: > Tube.TubeIndex]
+  GateID int 
+  AlarmID int 
+  SubModeID int 
+  MaxAmplitude float 
+  AlgoID int 
+}
+Table DimMeasure {
+  DimMeasureIndex int 
+  Type tinyint 
+  AlarmMin int 
+  AlarmMax int 
+  RejectMin int 
+  RejectMax int 
+  CountBeforeAlarm int 
+  FK_DM_ModeIndex int [ref: > Mode.ModeIndex]
+}
+Table DimMeasureSetup {
+  DimMeasureSetupIndex int 
+  Type tinyint 
+  AlarmMin int 
+  AlarmMax int 
+  RejectMin int 
+  RejectMax int 
+  CountBeforeAlarm int 
+  FK_DMS_ModeSetupIndex int [ref: > ModeSetup.ModeSetupIndex]
+}
+Table DimensionAlarm {
+  DimensionAlarmIndex int 
+  SystemID tinyint 
+  ChannelID smallint 
+  SubChannelID smallint 
+  RadialPosition int 
+  AxialPosition int 
+  Type tinyint 
+  Min int 
+  Max int 
+  IndicationLength int 
+  IndicationWidth int 
+  EntryDate datetime 
+  FK_DA_TubeIndex int [ref: > Tube.TubeIndex]
+}
+Table DimensionData {
+  DimensionDataIndex int 
+  SystemID tinyint 
+  ChannelID smallint 
+  Type tinyint 
+  CompressionType tinyint 
+  DataMin int 
+  DataMax int 
+  ScanQty int 
+  ScanRes int 
+  IndexQty int 
+  IndexRes int 
+  DataQty tinyint 
+  Data image 
+  FK_DD_TubeIndex int [ref: > Tube.TubeIndex]
+  IndexStartOffset int 
+  IndexFirstValidPoint int 
+}
+Table EOTAlarm {
+  EOTAlarmIndex int 
+  SystemID tinyint 
+  Zone tinyint 
+  Submode tinyint 
+  AlarmType tinyint 
+  Length int 
+  EntryDate datetime 
+  FK_EOTA_TubeIndex int [ref: > Tube.TubeIndex]
+}
+Table EOTInfo {
+  EOTInfoIndex int 
+  SystemID tinyint 
+  Zone tinyint 
+  Position int 
+  Length int 
+  FK_EOTI_TubeIndex int [ref: > Tube.TubeIndex]
+  SubMode tinyint 
+}
+Table File {
+  FileIndex int 
+  Name nvarchar 
+  SystemID tinyint 
+  CompletePath nvarchar 
+  Archived bit 
+  CreationDate datetime 
+  ArchiveReference nvarchar 
+  ArchivedDate datetime 
+  FK_F_TubeIndex int [ref: > Tube.TubeIndex]
+  MergeOverlap float 
+}
+Table FlawAlarm {
+  FlawAlarmIndex int 
+  SystemID tinyint 
+  ChannelID smallint 
+  SubChannelID smallint 
+  RadialPosition int 
+  AxialPosition int 
+  AmplitudeMax smallint 
+  TimeOfFlight int 
+  IndicationLength int 
+  IndicationWidth int 
+  Gate tinyint 
+  AlarmType tinyint 
+  EntryDate datetime 
+  FK_FA_TubeIndex int [ref: > Tube.TubeIndex]
+}
+Table FlawAlarmEC {
+  FlawAlarmIndex int 
+  SystemID tinyint 
+  AxialPosition int 
+  IndicationLength int 
+  EntryDate datetime 
+  FK_FAEC_TubeIndex int [ref: > Tube.TubeIndex]
+  Description nvarchar 
+}
+Table FlawData {
+  FlawDataIndex int 
+  SystemID tinyint 
+  ChannelID smallint 
+  GateID tinyint 
+  CompressionType tinyint 
+  ScanQty int 
+  ScanRes int 
+  IndexQty int 
+  IndexRes int 
+  Data image 
+  FK_FD_TubeIndex int [ref: > Tube.TubeIndex]
+  IndexStartOffset int 
+  IndexFirstValidPoint int 
+}
+Table Gate {
+  GateIndex int 
+  GateID tinyint 
+  Start int 
+  Length int 
+  Threshold float 
+  Level1 float 
+  Count1 float 
+  Level2 float 
+  Count2 float 
+  FK_G_ChannelIndex int [ref: > Channel.ChannelIndex]
+  DACGain float 
+  ContextID smallint 
+  GainGate float 
+}
+Table GateSetup {
+  GateSetupIndex int 
+  GateID tinyint 
+  Start int 
+  Length int 
+  Threshold float 
+  Level1 float 
+  Count1 float 
+  Level2 float 
+  Count2 float 
+  FK_GS_ChannelSetupIndex int [ref: > ChannelSetup.ChannelSetupIndex]
+  DACGain float 
+  ContextID smallint 
+  GainGate float 
+}
+Table HRDefectsRx {
+  HRDefectsRxIndex int 
+  FK_HRDR_HRRxIndex int [ref: > HRRx.HRRxIndex]
+  FK_HRDR_HRScannedDefectIndex int [ref: > HRScannedDefect.HRScannedDefectIndex]
+  AmplitudeMax float 
+}
+Table HRRange {
+  HRRangeIndex int 
+  FK_HRRA_HRSetIndex int [ref: > HRSet.HRSetIndex]
+  GroupIndexDB int 
+  DeviationThreshold float 
+  DivergenceThreshold float 
+  NormalizationLevel float 
+  HomogeneityThreshold float 
+}
+Table HRRx {
+  HRRxIndex int 
+  FK_HRR_HRSetIndex int [ref: > HRSet.HRSetIndex]
+  ChannelID int 
+  Angle float 
+  UseForInspection bit 
+  NormAmplitudeID float 
+  NormAmplitudeOD float 
+  CalibDefectAmplitudeID float 
+  CalibDefectAmplitudeOD float 
+  CalibDefectIDID float 
+  CalibDefectIDOD float 
+}
+Table HRScan {
+  HRScanIndex int 
+  FK_HRS_HRSetIndex int [ref: > HRSet.HRSetIndex]
+  FK_HRS_CalibrationProductIndex int [ref: > CalibrationProduct.CalibrationProductIndex]
+  ScanDateTime datetime 
+  UseForCalibration bit 
+}
+Table HRScanResult {
+  HRScanResultIndex int 
+  FK_HRSR_HRScanIndex int [ref: > HRScan.HRScanIndex]
+  FK_HRSR_HRRangeIndex int [ref: > HRRange.HRRangeIndex]
+  ChannelID int 
+  Type int 
+}
+Table HRScannedDefect {
+  HRScannedDefectIndex int 
+  FK_HRSD_HRScanResultIndex int [ref: > HRScanResult.HRScanResultIndex]
+  DefectID int 
+  Angle float 
+  Name nvarchar 
+  UseForNormalization bit 
+  UseForCalibration bit 
+}
+Table HRSet {
+  HRSetIndex int 
+  FK_HRSE_SetupIndex int [ref: > Setup.SetupIndex]
+  ClientID int 
+}
+Table LamDefect {
+  LamDefectIndex int 
+  Zone smallint 
+  PercentOfSurface float 
+  FK_LD_LamInfoIndex int [ref: > LamInfo.LamInfoIndex]
+}
+Table LamDefectContour {
+  LamDefectContourIndex int 
+  Type smallint 
+  RefID int 
+  AxialPos float 
+  AxialLength float 
+  RadialPos float 
+  RadialLength float 
+  Area float 
+  FK_LDC_LamDefectIndex int [ref: > LamDefect.LamDefectIndex]
+}
+Table LamInfo {
+  LamInfoIndex int 
+  SystemID tinyint 
+  RadialLength float 
+  AxialLength float 
+  EOTInTrimPos float 
+  EOTOutTrimPos float 
+  FK_LI_TubeIndex int [ref: > Tube.TubeIndex]
+}
+Table LamSliding {
+  LamSlidingIndex int 
+  Direction tinyint 
+  StartPos float 
+  StopPos float 
+  Percent float 
+  Count float 
+  FK_LS_LamDefectContourIndex int [ref: > LamDefectContour.LamDefectContourIndex]
+}
+Table LogEvent {
+  LogEventIndex int 
+  Number int 
+  DateTime datetime 
+  Description nvarchar 
+}
+Table Mode {
+  ModeIndex int 
+  InspectionRefID int 
+  SystemID tinyint 
+  ModeID tinyint 
+  APD int 
+  RPD int 
+  LimitIn float 
+  LimitOut float 
+  EdgeIn float 
+  EdgeOut float 
+  FK_M_BatchIndex int [ref: > Batch.BatchIndex]
+}
+Table ModeEC {
+  ModeECIndex int 
+  InspectionRefID int 
+  SystemID tinyint 
+  ModeID tinyint 
+  APD int 
+  RPD int 
+  LimitIn float 
+  LimitOut float 
+  EdgeIn float 
+  EdgeOut float 
+  FK_M_BatchIndex int [ref: > Batch.BatchIndex]
+}
+Table ModeSetup {
+  ModeSetupIndex int 
+  SystemID tinyint 
+  ModeID tinyint 
+  APD int 
+  RPD int 
+  LimitIn float 
+  LimitOut float 
+  EdgeIn float 
+  EdgeOut float 
+  FK_MS_SetupIndex int [ref: > Setup.SetupIndex]
+}
+Table Order {
+  OrderIndex int 
+  Name nvarchar 
+  CreationDate datetime 
+  ArchiveDate datetime 
+}
+Table ProbeFocalLawGain {
+  FocalLawIndex int 
+  FocalLawID int 
+  FocalLawName nvarchar 
+  GainOffset float 
+  FK_CPP_CalibrationProbeProduct int [ref: > CalibrationProbeProduct.CalibrationProbeIndex]
+}
+Table ProductTypeEC {
+  ProductTypeECIndex int 
+  Name nvarchar 
+  Path nvarchar 
+  Shape tinyint 
+  Length float 
+  MaxDiameter float 
+  MinDiameter float 
+  LastCalibrationProductNameCalibrated nvarchar 
+  DefaultSetupPath nvarchar 
+}
+Table ProductTypeSetupUT {
+  ProductTypeSetupUTIndex int 
+  IsDefaultSetup bit 
+  FK_PTSUT_SetupIndex int [ref: > Setup.SetupIndex]
+  FK_PTSUT_ProductTypeUTIndex int [ref: > ProductTypeUT.ProductTypeUTIndex]
+  SetupType int 
+}
+Table ProductTypeUT {
+  ProductTypeUTIndex int 
+  Name nvarchar 
+  Path nvarchar 
+  MaterialType int 
+  Length float 
+  Diameter float 
+  Thickness float 
+  MinDiameter float 
+  MaxDiameter float 
+  Width float 
+  TemplateProductTypeUTIndex int 
+}
+Table ProductTypeUTDac {
+  ProductTypeUTDacIndex int 
+  ID int 
+  PosPercent float 
+  Gain float 
+  GainOffsetInInsp float 
+  FK_PTUD_ProductTypeUTIndex int [ref: > ProductTypeUT.ProductTypeUTIndex]
+}
+Table ProveUpDimensionAlarm {
+  ProveUpDimensionAlarmIndex int 
+  SystemID tinyint 
+  ChannelID smallint 
+  SubChannelID smallint 
+  RadialPosition int 
+  AxialPosition int 
+  Type tinyint 
+  Min int 
+  Max int 
+  IndicationLength int 
+  IndicationWidth int 
+  EntryDate datetime 
+  ProveUpType tinyint 
+  FK_PDA_TubeIndex int [ref: > Tube.TubeIndex]
+}
+Table ProveUpFlawAlarm {
+  ProveUpFlawAlarmIndex int 
+  SystemID tinyint 
+  ChannelID smallint 
+  SubChannelID smallint 
+  RadialPosition int 
+  AxialPosition int 
+  AmplitudeMax smallint 
+  TimeOfFlight int 
+  IndicationLength int 
+  IndicationWidth int 
+  Gate tinyint 
+  AlarmType tinyint 
+  EntryDate datetime 
+  ProveUpType tinyint 
+  FK_PFA_TubeIndex int [ref: > Tube.TubeIndex]
+}
+Table RBGAlarm {
+  RBGAlarmIndex int 
+  SystemID tinyint 
+  ChannelID smallint 
+  RadialPosition int 
+  AxialPosition int 
+  IndicationLength int 
+  IndicationWidth int 
+  FilterID smallint 
+  EntryDate datetime 
+  FK_RBGA_TubeIndex int [ref: > Tube.TubeIndex]
+}
+Table RailConfig {
+  Family nvarchar 
+  Type nvarchar 
+  Profile nvarchar 
+  Config_ID int 
+  Custom_ID int 
+  FK_RCUT_SetupIndex int [ref: > Setup.SetupIndex]
+  FK_RCEC_SetupIndex int [ref: > Setup.SetupIndex]
+}
+Table ReportHRDefectsRx {
+  HRDefectsRxIndex int 
+  FK_HRDR_HRRxIndex int [ref: > HRRx.HRRxIndex]
+  FK_HRDR_HRScannedDefectIndex int [ref: > HRScannedDefect.HRScannedDefectIndex]
+  AmplitudeMax float 
+}
+Table ReportHRRange {
+  HRRangeIndex int 
+  FK_HRRA_HRSetIndex int [ref: > HRSet.HRSetIndex]
+  GroupIndexDB int 
+  DeviationThreshold float 
+  DivergenceThreshold float 
+  NormalizationLevel float 
+  HomogeneityThreshold float 
+  NominalStartAngle float 
+  NominalEndAngle float 
+  EffectiveStartAngle float 
+  EffectiveEndAngle float 
+  Homogeneity float 
+  TXAngle float 
+  RXResolution float 
+  RXNum int 
+  RXInspectionNum int 
+}
+Table ReportHRRx {
+  HRRxIndex int 
+  FK_HRR_HRSetIndex int [ref: > HRSet.HRSetIndex]
+  ChannelID int 
+  Angle float 
+  UseForInspection bit 
+  NormAmplitudeID float 
+  NormAmplitudeOD float 
+  CalibDefectAmplitudeID float 
+  CalibDefectAmplitudeOD float 
+  CalibDefectIDID float 
+  CalibDefectIDOD float 
+}
+Table ReportHRScan {
+  HRScanIndex int 
+  FK_HRS_HRSetIndex int [ref: > HRSet.HRSetIndex]
+  FK_HRS_CalibrationProductIndex int [ref: > CalibrationProduct.CalibrationProductIndex]
+  ScanDateTime datetime 
+  UseForCalibration bit 
+}
+Table ReportHRScanResult {
+  HRScanResultIndex int 
+  FK_HRSR_HRScanIndex int [ref: > HRScan.HRScanIndex]
+  FK_HRSR_HRRangeIndex int [ref: > HRRange.HRRangeIndex]
+  ChannelID int 
+  Type int 
+  Homogeneity float 
+  ChannelSubMode int 
+  ChannelOrientation int 
+}
+Table ReportHRScannedDefect {
+  HRScannedDefectIndex int 
+  FK_HRSD_HRScanResultIndex int [ref: > HRScanResult.HRScanResultIndex]
+  DefectID int 
+  Angle float 
+  Name nvarchar 
+  UseForNormalization bit 
+  UseForCalibration bit 
+  UTDeviation float 
+  UTDivergence float 
+}
+Table ReportHRSet {
+  HRSetIndex int 
+  FK_HRSE_SetupIndex int [ref: > Setup.SetupIndex]
+  SetupAdjustmentDateTime datetime 
+  ClientID int 
+}
+Table ScheduledBatches {
+  ScheduledIndex int 
+  BatchIndex int 
+  OrderIndex int 
+}
+Table Setup {
+  SetupIndex int 
+  Name nvarchar 
+  Path nvarchar 
+  FK_S_CalibrationSetUTIndex int [ref: > CalibrationSetUT.CalibrationSetUTIndex]
+  IsGapless int 
+  HR_Setup_Path nvarchar 
+  IsAdjusted int 
+}
+Table SetupContent {
+  FK_SC_SetupIndex int [ref: > Setup.SetupIndex]
+  ModesUsed nvarchar 
+  LayerQty tinyint 
+}
+Table SetupEC {
+  SetupIndex int 
+  Name nvarchar 
+  Path nvarchar 
+  FK_ProductTypeECIndex int [ref: > ProductTypeEC.ProductTypeECIndex]
+}
+Table Tube {
+  TubeIndex int 
+  Name nvarchar 
+  ScanNumber smallint 
+  OrderListNumber int 
+  IsCalibration bit 
+  InspectionDate datetime 
+  FK_T_BatchIndex int [ref: > Batch.BatchIndex]
+  InspectionRefID int 
+  InspectionDirection tinyint 
+  InspectionSpeed int 
+}
+Table TubeEC {
+  TubeECIndex int 
+  Judgment tinyint 
+  Start int 
+  Length int 
+  FK_TEC_TubeIndex int [ref: > Tube.TubeIndex]
+  InspectionRef int 
+}
+Table TubeInfo {
+  FK_TI_TubeIndex int [ref: > Tube.TubeIndex]
+  AlgoEnabled int 
+  ProveupEnabled tinyint 
+}
+Table TubeUT {
+  TubeUTIndex int 
+  Judgment tinyint 
+  Start int 
+  Length int 
+  Offset1 int 
+  Offset2 int 
+  FK_TUT_TubeIndex int [ref: > Tube.TubeIndex]
+}
+Table WTRAlarm {
+  WTRAlarmIndex int 
+  SystemID tinyint 
+  ChannelID smallint 
+  GateID tinyint 
+  AxialPosition int 
+  WTRemaining int 
+  WTValue int 
+  DefectDepth int 
+  EntryDate datetime 
+  FK_WTRA_TubeIndex int [ref: > Tube.TubeIndex]
+}
