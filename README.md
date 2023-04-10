@@ -31,9 +31,9 @@ A remote test database has been set up by the integrator to provide the current 
 # Project Updates
 This project was completed over 8 weeks in the spring of 2023. Progress reports can be found here:
 * [Week 2 project update](project_reports/week_2.md)
-<!--* [Week 3 project update](project_reports/week_3.md)
+* [Week 3 project update](project_reports/week_3.md)
 * [Week 4 project update](project_reports/week_4.md)
 * [Week 5 project update](project_reports/week_5.md)
-* [Week 6 project update](project_reports/week_6.md)
+<!--* [Week 6 project update](project_reports/week_6.md)
 * [Week 7 project update](project_reports/week_7.md)
 * -->
